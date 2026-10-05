@@ -1,0 +1,685 @@
+const questions = [
+  {
+    question: "Intel 8051 microcontroller किस प्रकार का microcontroller है?",
+    options: [
+      "64-bit microcontroller",
+      "16-bit microcontroller",
+      "24-bit microcontroller",
+      "8-bit microcontroller"
+    ],
+    answer: "D. 8-bit microcontroller",
+    source: "RRB Technician Grade-I — 19 December 2024, Shift 2 Testbook"
+  },
+  {
+    question: "Intel 8051 microcontroller में कितनी internal RAM होती है?",
+    options: ["64-byte", "128-byte", "32-byte", "16-byte"],
+    answer: "B. 128-byte",
+    source: "RRB Technician Grade-I — 19 December 2024, Shift 2 Testbook"
+  },
+  {
+    question: "Intel 8051 microcontroller में कितने 16-bit timer/counter registers होते हैं?",
+    options: ["तीन", "एक", "दो", "चार"],
+    answer: "C. दो",
+    source: "RRB Technician Grade-I — 19 December 2024, Shift 1 Testbook"
+  },
+  {
+    question: "Intel 8051 और Intel 8052 में क्रमशः कितनी interrupt structures होती हैं?",
+    options: ["6 और 7", "4 और 5", "7 और 8", "5 और 6"],
+    answer: "D. 5 और 6",
+    source: "RRB Technician Grade-I — 19 December 2024, Shift 3 Testbook"
+  },
+  {
+    question: "Microprocessor 8085 में निम्नलिखित में से कौन-सा 16-bit register है?",
+    options: ["Z register", "W register", "Flag register", "Stack Pointer"],
+    answer: "D. Stack Pointer",
+    source: "RRB Technician Grade-I — 19 December 2024, Shift 1 Testbook"
+  },
+  {
+    question: "8085 microprocessor के संबंध में निम्नलिखित में से कौन-सा कथन सही नहीं है?",
+    options: [
+      "इसमें serial I/O control होता है, जिससे serial communication संभव होता है।",
+      "इसमें interrupt handling capacity बढ़ाने की व्यवस्था होती है।",
+      "IC 8155 और IC 8355 जैसे supporting I/O devices के साथ इसका उपयोग three-chip microcomputer बनाने में किया जा सकता है।",
+      "इसमें bus cycles को control करने के लिए IO/M, RD और WR जैसे control signals नहीं होते, इसलिए external bus controller आवश्यक होता है।"
+    ],
+    answer: "D",
+    source: "RRB Technician Grade-I — 19 December 2024, Shift 1 Testbook"
+  },
+  {
+    question: "8085 microprocessor में कितनी address lines होती हैं और इनके द्वारा अधिकतम कितनी memory access की जा सकती है?",
+    options: ["16 lines; 32 KB", "8 lines; 32 KB", "8 lines; 64 KB", "16 lines; 64 KB"],
+    answer: "D. 16 lines; 64 KB",
+    source: "RRB Technician Grade-I — 19 December 2024, Shift 2 Testbook"
+  },
+  {
+    question: "8085 microprocessor का Address/Data buffer किस प्रकार का buffer है?",
+    options: [
+      "16-bit और unidirectional",
+      "8-bit और bi-directional",
+      "16-bit और bi-directional",
+      "8-bit और unidirectional"
+    ],
+    answer: "B. 8-bit और bi-directional",
+    source: "RRB Technician Grade-I — 20 December 2024, Shift 1 Testbook"
+  },
+  {
+    question: "8085 microprocessor clock cycle किस duty cycle पर operate करता है?",
+    options: ["25%", "50%", "10%", "75%"],
+    answer: "B. 50%",
+    source: "RRB Technician Grade-I — 20 December 2024, Shift 1 Testbook"
+  },
+  {
+    question: "निम्नलिखित में से कौन-सा Intel 8051 series के microcontroller का member नहीं है?",
+    options: ["80C31BH", "8044AH", "80C51BH", "87C51"],
+    answer: "B. 8044AH",
+    source: "RRB Technician Grade-I — 20 December 2024, Shift 1 Testbook"
+  },
+  {
+    question: "8051 microcontroller का Port 0 अन्य ports से architectural रूप से मुख्यतः किस कारण अलग है?",
+    options: [
+      "यह केवल memory expansion के लिए reserved है।",
+      "इसमें internal pull-up resistors नहीं होते।",
+      "यह output port के रूप में कार्य नहीं कर सकता।",
+      "यह bit-addressable नहीं है।"
+    ],
+    answer: "B. इसमें internal pull-up resistors नहीं होते।",
+    source: "RRB Technician Grade-I — 13 March 2026 Testbook"
+  },
+  {
+    question: "8051 microcontroller में PSEN एक ______ output signal है, जिसका उपयोग ______ memory को access करने के लिए read strobe के रूप में किया जाता है।",
+    options: [
+      "Active high, internal RAM",
+      "Active low, external program",
+      "Active low, internal RAM",
+      "Active high, external program"
+    ],
+    answer: "B. Active low, external program memory",
+    source: "RRB Technician Grade-I — 13 March 2026 Testbook"
+  },
+  {
+    question: "8051 microcontroller में कुल कितने I/O pins होते हैं?",
+    options: ["24", "40", "26", "32"],
+    answer: "D. 32",
+    source: "RRB JE ECE — 22 April 2025, Shift 1 CBT-2 Testbook"
+  },
+  {
+    question: "8051 microcontroller में कौन-सा port dual function नहीं रखता?",
+    options: ["Port 1", "Port 2", "Port 3", "Port 0"],
+    answer: "A. Port 1",
+    source: "RRB JE ECE — 22 April 2025, Shift 2 CBT-2 Testbook"
+  },
+  {
+    question: "8051 microcontroller के XTAL1 और XTAL2 pins का मुख्य कार्य क्या है?",
+    options: [
+      "External interrupt control",
+      "Oscillator connection for clock generation",
+      "Address/data bus decoding",
+      "Serial data transmission"
+    ],
+    answer: "B. Oscillator connection for clock generation",
+    source: "RRB JE ECE — 22 April 2025, Shift 1 CBT-2 Testbook"
+  },
+  {
+    question: "8051 microcontroller के चार register banks में से कुल कितने register banks होते हैं?",
+    options: ["तीन", "चार", "छह", "दो"],
+    answer: "B. चार",
+    source: "RRB JE ECE — 22 April 2025, Shift 2 CBT-2 Testbook"
+  },
+  {
+    question: "निम्नलिखित में से कौन-सा 8051 microcontroller में bidirectional I/O के साथ external memory के लिए address/data bus का कार्य करता है?",
+    options: ["Port 1", "Port 3", "Port 0", "Port 4"],
+    answer: "C. Port 0",
+    source: "RRB JE ECE — 22 April 2025, Shift 1 CBT-2 Testbook"
+  },
+  {
+    question: "8051 में निम्न instructions दिए गए हैं: MOV PSW, #18H MOV R3, #55H MOV A, R3 MOV A, R3 instruction में R3 किस register bank से select होगा?",
+    options: ["Bank 3", "Bank 0", "Bank 2", "Bank 1"],
+    answer: "A. Bank 3",
+    source: "RRB JE CBT-2 — 2 July 2026, Shift 1 Prepp"
+  },
+  {
+    question: "8051 microcontroller में Harvard architecture के संबंध में सही कथन कौन-सा है?",
+    options: [
+      "इसमें केवल RAM का उपयोग होता है।",
+      "Program और data के लिए अलग-अलग memory होती है।",
+      "इसमें external memory support नहीं होता।",
+      "Program और data के लिए एक ही memory होती है।"
+    ],
+    answer: "B. Program और data के लिए separate memory",
+    source: "RRB JE CBT-2 — 2 July 2026, Shift 1 Testbook"
+  },
+  {
+    question: "8051 microcontroller external memory को मुख्य रूप से किस माध्यम से access करता है?",
+    options: [
+      "Direct addressing",
+      "Immediate addressing",
+      "Register addressing",
+      "DPTR के माध्यम से indirect addressing"
+    ],
+    answer: "D. DPTR के माध्यम से indirect addressing",
+    source: "RRB JE CBT-2 Electronics Re-Exam — 4 June 2025 Testbook"
+  },
+  {
+    question: "8051 microcontroller reset होने पर Stack Pointer का प्रारंभिक value क्या होता है?",
+    options: ["06H", "08H", "00H", "07H"],
+    answer: "D. 07H",
+    source: "RRB JE CBT-2 Electronics Re-Exam — 4 June 2025 Testbook"
+  },
+  {
+    question: "8051 microcontroller में Accumulator register का address क्या है?",
+    options: ["E0H", "92H", "B0H", "82H"],
+    answer: "A. E0H",
+    source: "RRB JE CBT-2 Electronics Re-Exam — 4 June 2025 Testbook"
+  },
+  {
+    question: "8051 microcontroller में PSW में कौन-कौन से flags store होते हैं?",
+    options: ["Accumulator", "Program Counter", "Stack Pointer", "Program Status Word"],
+    answer: "D. PSW",
+    source: "UPPCL JE Electrical — 8 September 2021, Shift 2 Testbook"
+  },
+  {
+    question: "8051 microcontroller में unconditional jump के लिए कौन-सा instruction प्रयोग होता है?",
+    options: ["CJNE", "SJMP", "JZ", "JNZ"],
+    answer: "B. SJMP",
+    source: "UPPCL JE Electrical — 8 September 2021, Shift 2 Testbook"
+  },
+  {
+    question: "8051 microcontroller के serial port द्वारा data rate control करने के लिए निम्नलिखित में से किसका उपयोग किया जाता है?",
+    options: ["SCON register", "PCON register", "SBUF register", "RXD और TXD pins"],
+    answer: "A. SCON register",
+    source: "UPPCL JE Electrical — 7 September 2021, Shift 2 Testbook"
+  },
+  {
+    question: "8051 microcontroller में कुल कितने 8-bit ports उपलब्ध होते हैं?",
+    options: ["8", "6", "2", "4"],
+    answer: "D. 4",
+    source: "UPPCL JE Electrical — 8 September 2021, Shift 2 Testbook"
+  },
+  {
+    question: "8051 microcontroller में कितने Special Function Registers (SFRs) होते हैं?",
+    options: ["21", "8", "16", "11"],
+    answer: "A. 21",
+    source: "UPPCL JE EC — 25 March 2021, Shift 1 Testbook"
+  },
+  {
+    question: "8051 microcontroller में दो 16-bit SFRs कौन-से हैं?",
+    options: ["PC और DPTR", "SP और PSW", "SP और DPTR", "PC और SP"],
+    answer: "A. PC और DPTR",
+    source: "UPPCL JE Previous Paper — 27 November 2019 Testbook"
+  },
+  {
+    question: "8051 microcontroller maximum कितनी program memory और external data memory access कर सकता है?",
+    options: ["64 KB, 32 KB", "32 KB, 64 KB", "64 KB, 64 KB", "16 KB, 64 KB"],
+    answer: "C. 64 KB, 64 KB",
+    source: "UPPCL JE EC — 25 March 2021, Shift 1 Testbook"
+  },
+  {
+    question: "8051 microcontroller में default condition में interrupts की स्थिति क्या होती है?",
+    options: [
+      "केवल Timer/Counter 0 interrupt disabled होता है।",
+      "सभी interrupts disabled होते हैं।",
+      "केवल system reset interrupt disabled होता है।",
+      "केवल Timer/Counter 1 interrupt disabled होता है।"
+    ],
+    answer: "B. सभी interrupts disabled होते हैं।",
+    source: "UPPCL JE EC — 25 March 2021, Shift 2 Testbook"
+  },
+  {
+    question: "8051 microcontroller में flags किस register में store होते हैं?",
+    options: ["Accumulator", "Program Counter", "Stack Pointer", "PSW"],
+    answer: "D. PSW",
+    source: "UPPCL JE Electrical — 8 September 2021, Shift 2 Testbook"
+  },
+  {
+    question: "8051 microcontroller में कितने math flags होते हैं?",
+    options: ["4", "5", "6", "7"],
+    answer: "A. 4",
+    source: "UPPCL JE Electrical — 27 November 2019, Shift 2 Testbook"
+  },
+  {
+    question: "8051 microcontroller में NOP instruction का उपयोग किस उद्देश्य से किया जाता है?",
+    options: ["DA A", "NOP", "SWAP", "CLR A"],
+    answer: "B. NOP — software timing loop में delay उत्पन्न करने के लिए",
+    source: "UPPCL JE Electrical — 8 September 2021, Shift 2 Testbook"
+  },
+  {
+    question: "8051 microcontroller की कौन-सी विशेषता सही नहीं है?",
+    options: [
+      "इसमें 1 serial port है।",
+      "इसमें 4 KB ROM है।",
+      "इसमें 4 timers हैं।",
+      "इसमें 128 bytes RAM है।"
+    ],
+    answer: "C. इसमें 4 timers हैं।",
+    source: "UPPCL JE EE — 29 March 2022, Shift 1 Testbook"
+  },
+  {
+    question: "1993 में flash memory का उपयोग करने वाला पहला microcontroller किस company ने introduce किया था?",
+    options: ["Atmel", "Intel", "Alchemist", "Ericson"],
+    answer: "A. Atmel",
+    source: "UPPCL JE EC — 25 March 2021, Shift 2 Testbook"
+  },
+  {
+    question: "8051 microcontroller को reset करने पर निम्नलिखित में से कौन-सी स्थिति प्राप्त होती है?",
+    options: [
+      "SP = 08H, P1 = 00H, RS0 = 1, RS1 = 1",
+      "SP = 07H, P1 = 00H, RS0 = 0, RS1 = 0",
+      "SP = 08H, P1 = FFH, RS0 = 0, RS1 = 0",
+      "SP = 07H, P1 = FFH, RS0 = 0, RS1 = 0"
+    ],
+    answer: "D. SP = 07H, P1 = FFH, RS0 = 0, RS1 = 0",
+    source: "UPPCL JE Previous Paper — 27 November 2019 Testbook"
+  },
+  {
+    question: "8051 microcontroller की internal RAM का size कितना है?",
+    options: ["128 Bytes", "256 Bytes", "16 Bytes", "64 Bytes"],
+    answer: "A. 128 Bytes",
+    source: "RRB ALP Electronics Mechanic — 23 January 2019, Shift 2 Testbook"
+  },
+  {
+    question: "8051 microcontroller की internal general-purpose memory कितनी होती है?",
+    options: ["16 Byte", "128 Byte", "8 Byte", "64 Byte"],
+    answer: "B. 128 Byte",
+    source: "RRB ALP Electronics Mechanic — 23 January 2019, Shift 2 Testbook"
+  },
+  {
+    question: "8051 microcontroller में कितने 16-bit registers होते हैं?",
+    options: ["8", "1", "4", "2"],
+    answer: "D. 2",
+    source: "RRB ALP Electronics Mechanic — 23 January 2019, Shift 3 Testbook"
+  },
+  {
+    question: "8051 microcontroller में दो numbers को add करने के बाद resultant कहाँ store होता है?",
+    options: [
+      "Erased हो जाता है",
+      "कहीं store नहीं होता",
+      "Accumulator में store होता है",
+      "Register में store होता है"
+    ],
+    answer: "C. Accumulator में store होता है",
+    source: "RRB ALP Electronics Mechanic — 21 January 2019, Shift 3 Testbook"
+  },
+  {
+    question: "8051 microcontroller में कितने counter/timer होते हैं?",
+    options: ["2", "8", "4", "1"],
+    answer: "A. 2",
+    source: "RRB ALP Electronics Mechanic — 21 January 2019, Shift 3 Testbook"
+  },
+  {
+    question: "8051 microcontroller में XTAL1 और XTAL2 pins के numbers क्या हैं?",
+    options: ["15 और 16", "18 और 19", "12 और 13", "17 और 18"],
+    answer: "B. 18 और 19",
+    source: "RRB ALP Electronics Mechanic — 23 January 2019, Shift 2 Testbook"
+  },
+  {
+    question: "RRB ALP के 8051 microcontroller के संदर्भ में hardware interfacing के दौरान I/O ports क्यों आवश्यक होते हैं?",
+    options: [
+      "Calculations करने के लिए",
+      "Processing के लिए information store करने के लिए",
+      "Microcontroller की clock frequency बढ़ाने के लिए",
+      "External devices के साथ interface करने के लिए"
+    ],
+    answer: "D. External devices के साथ interface करने के लिए",
+    source: "RRB ALP CBT-2 Wiremen — 28 July 2026, Shift 2 Prepp"
+  },
+  {
+    question: "8051 microcontroller में switches को Port 1 से connect किया गया है। Switch status पढ़ने से पहले port pins पर logic ‘1’ लिखने का उद्देश्य क्या है?",
+    options: [
+      "Port register में stored data clear करना",
+      "Port pins को output के रूप में configure करना",
+      "Port pins को input के रूप में configure करना",
+      "Serial communication enable करना"
+    ],
+    answer: "C. Port pins को input के रूप में configure करना",
+    source: "RRB ALP CBT-2 Wiremen — 28 July 2026, Shift 2 Prepp"
+  },
+  {
+    question: "8051 system में lower address byte और data एक ही lines पर multiplexed होते हैं। Lower address byte को temporarily hold करने के लिए किस hardware component की आवश्यकता होती है?",
+    options: ["Encoder", "Multiplexer", "Subtractor", "Latch"],
+    answer: "D. Latch",
+    source: "RRB ALP CBT-2 Wiremen — 28 July 2026, Shift 2 Prepp"
+  },
+  {
+    question: "8085A microprocessor की base clock speed कितनी होती है?",
+    options: ["5.0 MHz", "3.0 MHz", "3.5 MHz", "2.5 MHz"],
+    answer: "B. 3.0 MHz",
+    source: "UPPCL JE EC — 25 March 2021, Shift 2 Testbook"
+  },
+  {
+    question: "Microprocessor terminology में DMA का full form क्या है?",
+    options: [
+      "Direct Memory Advice",
+      "Direct Memory Access",
+      "Dual Memory Access",
+      "Direct Memorable Access"
+    ],
+    answer: "B. Direct Memory Access",
+    source: "UPPCL JE EC — 25 March 2021, Shift 2 Testbook"
+  },
+  {
+    question: "8085 microprocessor में RST 5 instruction का hexadecimal calling/vector address क्या है?",
+    options: ["0028H", "0018H", "0030H", "0020H"],
+    answer: "A. 0028H",
+    source: "UPPCL JE EC — 25 March 2021, Shift 2 Testbook"
+  },
+  {
+    question: "8085 microprocessor में निम्नलिखित में से highest-priority interrupt कौन-सा है?",
+    options: ["RST 5.5", "RST 3.5", "TRAP", "RST 7.5"],
+    answer: "C. TRAP",
+    source: "UPRVUNL JE EE — 21 October 2021, Shift 1 Testbook"
+  },
+  {
+    question: "8085 microprocessor में सबसे कम priority वाला interrupt कौन-सा है?",
+    options: ["INTR", "TRAP", "RST 7.5", "RST 5.5"],
+    answer: "A. INTR",
+    source: "DSSSB JE Electrical — 22 June 2022, Shift 1 Testbook"
+  },
+  {
+    question: "8085 microprocessor के flag register में कितने one-bit flags होते हैं?",
+    options: ["4", "5", "3", "0"],
+    answer: "B. 5",
+    source: "DSSSB JE E&M — 21 March 2022, Shift 1 Testbook"
+  },
+  {
+    question: "8085 microprocessor का accumulator कितने bits का register होता है?",
+    options: ["16", "12", "8", "4"],
+    answer: "C. 8-bit",
+    source: "DSSSB JE Electrical — 22 June 2022, Shift 1 Testbook"
+  },
+  {
+    question: "8085 microprocessor द्वारा कितनी memory locations address की जा सकती हैं?",
+    options: ["128 K", "64 K", "32 K", "16 K"],
+    answer: "B. 64 K",
+    source: "DSSSB JE Electrical — 16 March 2022 Testbook"
+  },
+  {
+    question: "8085 microprocessor में कितनी address lines होती हैं?",
+    options: ["8", "32", "10", "16"],
+    answer: "D. 16",
+    source: "DSSSB JE Electrical — 16 March 2022 Testbook"
+  },
+  {
+    question: "8051-based microcontroller में कितने bytes की memory bit-addressable होती है?",
+    options: ["8", "32", "16", "128"],
+    answer: "C. 16 bytes",
+    source: "RRB JE Electronics — 1 September 2019, Shift 2 Testbook"
+  },
+  {
+    question: "8051 microcontroller के साथ कुल कितनी external data memory interface की जा सकती है?",
+    options: ["256 K", "64 K", "32 K", "128 K"],
+    answer: "B. 64 K",
+    source: "RRB JE Electronics — 1 September 2019, Shift 2 Testbook"
+  },
+  {
+    question: "8051 microcontroller में 16-bit timer/counter registers की संख्या कितनी है?",
+    options: ["Three", "One", "Two", "Four"],
+    answer: "C. Two",
+    source: "RRB Technician Grade-I — 19 December 2024, Shift 1 Testbook"
+  },
+  {
+    question: "8085 microprocessor के multiplexed address और data lines कौन-सी हैं?",
+    options: ["AD7–AD0", "AD8–AD1", "AD8–AD15", "AD9–AD16"],
+    answer: "A. AD7–AD0",
+    source: "RRB JE ECE — 22 April 2025, Shift 1 CBT-2 Testbook"
+  },
+  {
+    question: "8085 microprocessor में जब RD signal LOW और IO/M signal HIGH हो, तो कौन-सा machine cycle चल रहा होता है?",
+    options: ["I/O Write", "Memory Write", "I/O Read", "Memory Read"],
+    answer: "C. I/O Read",
+    source: "RRB JE ECE — 22 April 2025, Shift 2 CBT-2 Testbook"
+  },
+  {
+    question: "8085 microprocessor में pending interrupts को identify करने के लिए कौन-सा instruction प्रयोग किया जाता है?",
+    options: ["ANI", "SIM", "RIM", "LXI"],
+    answer: "C. RIM",
+    source: "RRB JE ECE — 22 April 2025, Shift 1 CBT-2 Testbook"
+  },
+  {
+    question: "8085 microprocessor में INTA′ signal का मुख्य कार्य क्या है?",
+    options: [
+      "Interrupts enable करना",
+      "Interrupt request को acknowledge करना",
+      "Interrupts disable करना",
+      "Processor को reset करना"
+    ],
+    answer: "B. Interrupt request को acknowledge करना",
+    source: "RRB JE CBT-2 — 2 July 2026, Shift 1 Prepp"
+  },
+  {
+    question: "8085 microprocessor में कौन-सा instruction subroutine से वापस calling program में लौटने के लिए प्रयोग किया जाता है?",
+    options: ["RET", "RST", "CALL", "JMP"],
+    answer: "A. RET",
+    source: "RRB JE CBT-2 — 2 July 2026, Shift 1 Prepp"
+  },
+  {
+    question: "8085 microprocessor में ORA B instruction क्या operation करता है?",
+    options: [
+      "Accumulator से B को subtract करता है",
+      "Accumulator और B के बीच AND करता है",
+      "Accumulator में B जोड़ता है",
+      "Accumulator और B के बीच logical OR करता है"
+    ],
+    answer: "D. Logical OR",
+    source: "RRB JE CBT-2 — 2 July 2026, Shift 1 Prepp"
+  },
+  {
+    question: "8085 microprocessor में PCHL instruction का कार्य क्या है?",
+    options: [
+      "PC को HL के content से load करना",
+      "Stack से PC को pop करना",
+      "HL को PC के content से load करना",
+      "PC को stack पर push करना"
+    ],
+    answer: "A. PC को HL से load करना",
+    source: "RRB JE CBT-2 — 2 July 2026, Shift 1 Prepp"
+  },
+  {
+    question: "8085 microprocessor में SUI 20H instruction execute करने पर क्या operation होता है?",
+    options: [
+      "Accumulator से 20H subtract होता है",
+      "Accumulator से 20H borrow के साथ subtract होता है",
+      "Accumulator में 20H add होता है",
+      "Accumulator की तुलना 20H से होती है"
+    ],
+    answer: "A. Accumulator से 20H subtract होता है",
+    source: "RRB JE CBT-2 — 2 July 2026, Shift 1 Prepp"
+  },
+  {
+    question: "8085 microprocessor में RST 3 instruction execute होने के बाद Program Counter में कौन-सा value आएगा?",
+    options: ["0030H", "0024H", "0018H", "0003H"],
+    answer: "C. 0018H",
+    source: "RRB JE CBT-2 — 2 July 2026, Shift 1 Prepp"
+  },
+  {
+    question: "8085 microprocessor में RST 3 का vector address निर्धारित करने पर Program Counter किस fixed address पर जाता है?",
+    options: ["0008H", "0010H", "0018H", "0020H"],
+    answer: "C. 0018H",
+    source: "RRB JE CBT-2 — 2 July 2026, Shift 1 Prepp"
+  },
+  {
+    question: "8051 microcontroller में दिए गए instructions के बाद active register bank कौन-सा होगा? MOV PSW,#18H MOV R3,#55H MOV A,R3",
+    options: ["Bank 3", "Bank 0", "Bank 2", "Bank 1"],
+    answer: "A. Bank 3",
+    source: "RRB JE CBT-2 — 2 July 2026, Shift 1 Prepp"
+  },
+  {
+    question: "8085 किस प्रकार का microprocessor है?",
+    options: ["4-bit", "8-bit", "16-bit", "32-bit"],
+    answer: "B. 8-bit",
+    source: "ISRO VSSC Scientific Assistant Physics — 6 August 2017 Testbook"
+  },
+  {
+    question: "Microprocessor में अगले instruction को fetch करने के लिए आवश्यक address को रखने वाला register कौन-सा है?",
+    options: [
+      "Instruction Register",
+      "Stack Pointer",
+      "Accumulator",
+      "Program Counter"
+    ],
+    answer: "D. Program Counter",
+    source: "ISRO VSSC Technical Assistant Electronics — 11 February 2024 Testbook"
+  },
+  {
+    question: "8085 microprocessor system में memory-mapped I/O के संबंध में कौन-सा कथन सही है?",
+    options: [
+      "I/O devices में 8-bit address होता है।",
+      "I/O devices को IN और OUT instructions से access किया जाता है।",
+      "अधिकतम 256 input और 256 output devices हो सकते हैं।",
+      "I/O data पर arithmetic और logic operations directly perform किए जा सकते हैं।"
+    ],
+    answer: "D",
+    source: "ISRO Scientist EC — 2011 Testbook"
+  },
+  {
+    question: "8085 microprocessor में कौन-सा interrupt non-maskable होता है?",
+    options: ["RST 5.5", "RST 7.5", "TRAP", "RST 5.5 और RST 7.5 दोनों"],
+    answer: "C. TRAP",
+    source: "ISRO Scientist CS — 2017 Testbook"
+  },
+  {
+    question: "8085 microprocessor के flag register में arithmetic या Boolean operation के result का most significant bit किस flag में indicate होता है?",
+    options: ["Carry Status Flag", "Parity Flag", "Sign Flag", "Zero Flag"],
+    answer: "C. Sign Flag",
+    source: "UJVNL AE EE — 2016 Testbook"
+  },
+  {
+    question: "8085 microprocessor के निम्न program के बाद flag register का content क्या होगा? SUB A MVI B,01H DCR B HLT",
+    options: ["54H", "00H", "01H", "45H"],
+    answer: "A. 54H",
+    source: "ISRO Scientist CS — 2015 Testbook"
+  },
+  {
+    question: "8085 microprocessor में दिए गए program के लिए, यदि DATA1 = A7H हो, तो PORT1 पर output क्या होगा? MVI A, DATA1 ORA A JM DISPLAY OUT PORT1 CMA DISPLAY: ADI 01H OUT PORT1",
+    options: ["A7H", "58H", "00H", "59H"],
+    answer: "D. 59H",
+    source: "ISRO Scientist EC — 2017 Testbook"
+  },
+  {
+    question: "8085 microprocessor में यदि A = 08H, B = 07H और Carry Flag = 0 है, तो B को उसके original value का तीन गुना बनाने के लिए कौन-सा instruction sequence सही है?",
+    options: [
+      "MOV A,B → ADD B → RLC → MOV B,A",
+      "MOV A,B → RLC → ADD B → MOV B,A",
+      "ADD B → MOV A,B → RLC → MOV B,A",
+      "MOV B,A → ADD B → RLC → MOV A,B"
+    ],
+    answer: "B. MOV A,B → RLC → ADD B → MOV B,A",
+    source: "ISRO VSSC Technical Assistant Electronics — 11 February 2024 Testbook"
+  },
+  {
+    question: "8086 microprocessor का 16-bit flag register मुख्य रूप से किसका indication देता है?",
+    options: [
+      "ALU operation के result की condition",
+      "Memory की condition",
+      "केवल addition का result",
+      "केवल subtraction का result"
+    ],
+    answer: "A. ALU operation के result की condition",
+    source: "ISRO LPSC Technical Assistant Electronics — 7 August 2016 Testbook"
+  },
+  {
+    question: "8086 microprocessor में TRAP flag का उपयोग किस उद्देश्य से किया जाता है?",
+    options: [
+      "Single stepping",
+      "Operation की speed बढ़ाने के लिए",
+      "Overflow detection",
+      "Physical address calculation"
+    ],
+    answer: "A. Single stepping",
+    source: "ISRO URSC Technical Assistant Electronics — 24 March 2019 Testbook"
+  },
+  {
+    question: "Microprocessor के साथ wait state का उपयोग किस प्रकार के devices को interface करने के लिए किया जाता है?",
+    options: ["Interrupt devices", "Processor की speed बढ़ाने के लिए", "Slow devices", "इनमें से कोई नहीं"],
+    answer: "C. Slow devices",
+    source: "ISRO URSC Technical Assistant Electronics — 3 November 2022, Shift 2 Testbook"
+  },
+  {
+    question: "8051 microcontroller में serial data के interrupt bits TI और RI को कौन-सा register hold करता है?",
+    options: ["SMOD", "SCON", "PCON", "IE"],
+    answer: "B. SCON",
+    source: "ISRO URSC Technical Assistant Electronics — 13 November 2016"
+  }
+];
+
+const quizCard = document.getElementById('quizCard');
+const questionNumber = document.getElementById('questionNumber');
+const questionText = document.getElementById('questionText');
+const optionsContainer = document.getElementById('optionsContainer');
+const answerToggle = document.getElementById('answerToggle');
+const answerBox = document.getElementById('answerBox');
+const previousBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const progressText = document.getElementById('progressText');
+
+let currentIndex = 0;
+
+function renderQuestion() {
+  const item = questions[currentIndex];
+
+  questionNumber.textContent = `Q${currentIndex + 1}.`;
+  questionText.textContent = item.question;
+
+  optionsContainer.innerHTML = "";
+  item.options.forEach((option, index) => {
+    const optionItem = document.createElement('div');
+    optionItem.className = 'option-item';
+
+    const label = document.createElement('span');
+    label.className = 'option-label';
+    label.textContent = String.fromCharCode(65 + index);
+
+    const value = document.createElement('span');
+    value.textContent = option;
+
+    optionItem.appendChild(label);
+    optionItem.appendChild(value);
+    optionsContainer.appendChild(optionItem);
+  });
+
+  answerBox.classList.add('hidden');
+  answerToggle.textContent = 'Show Answer';
+
+  previousBtn.disabled = currentIndex === 0;
+  nextBtn.textContent = currentIndex === questions.length - 1 ? 'End' : 'Next';
+  nextBtn.disabled = currentIndex === questions.length - 1;
+  progressText.textContent = `${currentIndex + 1} / ${questions.length}`;
+
+  quizCard.classList.remove('is-animating');
+  void quizCard.offsetWidth;
+  quizCard.classList.add('is-animating');
+  setTimeout(() => quizCard.classList.remove('is-animating'), 260);
+}
+
+function showAnswer() {
+  const item = questions[currentIndex];
+  const isHidden = answerBox.classList.contains('hidden');
+
+  if (isHidden) {
+    answerBox.innerHTML = `<strong>✅ उत्तर:</strong> ${item.answer}<br><span>${item.source}</span>`;
+    answerBox.classList.remove('hidden');
+    answerToggle.textContent = 'Hide Answer';
+  } else {
+    answerBox.classList.add('hidden');
+    answerToggle.textContent = 'Show Answer';
+  }
+}
+
+function goNext() {
+  if (currentIndex < questions.length - 1) {
+    currentIndex += 1;
+    renderQuestion();
+  }
+}
+
+function goPrevious() {
+  if (currentIndex > 0) {
+    currentIndex -= 1;
+    renderQuestion();
+  }
+}
+
+answerToggle.addEventListener('click', showAnswer);
+nextBtn.addEventListener('click', goNext);
+previousBtn.addEventListener('click', goPrevious);
+
+renderQuestion();
